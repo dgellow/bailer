@@ -1,0 +1,26 @@
+{
+  "name": "bailer",
+  "version": "0.0.1",
+  "description": "Small validation library. Inspired by leonardoborges/bouncer.",
+  "main": "index.js",
+  "devDependencies": {
+    "colors": "^1.1.2"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dgellow/bailer.git"
+  },
+  "keywords": [
+    "validation",
+    "lightweight"
+  ],
+  "author": "Samuel El-Borai <samuel.elborai@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dgellow/bailer/issues"
+  },
+  "homepage": "https://github.com/dgellow/bailer"
+}
