@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dgellow/bailer.svg?branch=master)](https://travis-ci.org/dgellow/bailer)
+
 # bailer
 
 A small validation library. Inspired by [leonardoborges's bouncer](https://github.com/leonardoborges/bouncer) for Clojure.
