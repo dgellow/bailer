@@ -13,6 +13,7 @@ var dummyModel = {
   firstname: 'John',
   lastname: 'Doe',
   age: 23,
+  email: 'john.doe@example.org',
   messages: [{dest: 'Leo', val: 'Hello'},
              {dest: 'Clotild', val: 'Wanna eat something?'},
              {dest: 'Alphonse', val: '!'}],
@@ -94,6 +95,39 @@ reportTest("`required` validations", function () {
   );
 });
 
+
+
+//
+// v.email
+//
+reportTest("`email` validations", function() {
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      email: [v.email]
+    }),
+    [null, dummyModel]
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      name: [v.email]
+    }),
+    [{name: ["name is not a valid email address"]}, dummyModel]
+  );
+
+  assert.deepEqual(
+    b.validate({}, {
+      email: [v.email]
+    }),
+    [{email: ["email is not a valid email address"]}, {}]
+  );
+});
+
+
+
+//
+// Tests result
+//
 console.log('Total: ' + counterTotal);
 console.log('Passed: ' + counterSuccess);
 console.log('Failed: ' + counterFailure);

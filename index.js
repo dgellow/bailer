@@ -50,3 +50,9 @@ module.exports.validations.required = function required(obj, attributeName) {
   return !!obj[attributeName] ? null :
     "".concat(attributeName, " must be present");
 };
+
+module.exports.validations.email = function email(obj, attributeName) {
+  var emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  return emailRegex.test(obj[attributeName]) ? null:
+    "".concat(attributeName, " is not a valid email address");
+};
