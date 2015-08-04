@@ -55,6 +55,13 @@ reportTest("`validate` without rules", function () {
     }),
     [null, dummyModel]
   );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      missingProperty: []
+    }),
+    [null, dummyModel]
+  );
 });
 
 
