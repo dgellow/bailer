@@ -2,7 +2,7 @@
 
 # bailer
 
-A small validation library. Inspired by [leonardoborges's bouncer](https://github.com/leonardoborges/bouncer) for Clojure.
+A lightweight validation library. Inspired by [leonardoborges's bouncer](https://github.com/leonardoborges/bouncer) for Clojure.
 
 ## Setup
 
