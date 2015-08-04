@@ -12,25 +12,37 @@ npm install bailer
 
 ## Usage
 
-At the moment, the only available validator is `required` (It's a v0.0.1 btw).
+At the moment, the only built-in validators are `bailer.validations.required` and `bailer.validations.email` (It's a v0.0.2 btw). But you can create your own (see [here](#custom-validators)).
 
 ```js
-var b = require('bailer');
+var b = require('bailer'),
+    v = b.validations;
 
-var person = {name: "John", age: 20, corporation: ''};
+// Define a dummy object.
+var person = {name: "John", age: 20,
+              corporation: '',
+              email: "john.doe@example.org"};
 
+// Check if it matches the schema.
 b.validate(person, {
-  name: [b.required],
-  age: [b.required]
+  name: [v.required],
+  age: [v.required],
+  email: [v.email]
 });
 
 // Every validations passed.
 // Result:
-// [null, {name: "John", age: 20, corporation: ''}]
+// [null, {name: "John",
+//         age: 20,
+//         corporation: '',
+//         email: "john.doe@example.org"}]
 //
 
+```
 
+### Errors
 
+```js
 b.validate(person, {
   name: [b.required],
   corporation: [b.required],
@@ -40,19 +52,51 @@ b.validate(person, {
 // Uh-oh. The person object object doesn't have a truthy corporation
 // (it is empty) or firstname (it is undefined).
 // Result:
-// [{
-//   corporation: ["corporation must be present"],
-//   firstname: ["firstname must be present"]
-//  }, {name: "John", age: 20, corporation: ''}]
+// [
+//  {
+//    corporation: ["corporation must be present"],
+//    firstname: ["firstname must be present"]
+//  }, {
+//    name: "John",
+//    age: 20,
+//    corporation: '',
+//    email: "john.doe@example.org"
+//  }
+// ]
+```
 
 
+You can use a custom message.
 
-// You can pass a custom message
+```
 b.validate(person, {
   corporation: [b.required, "What! You don't work for a corporation?!"]
 });
 // which results in:
-// [{
-//   corporation: ["What! You don't work for a corporation?!"]
-//  }, {name: "John", age: 20, corporation: ''}]
+// [
+//   {
+//     corporation: ["What! You don't work for a corporation?!"]
+//  }, {
+//    name: "John",
+//    age: 20,
+//    corporation: '',
+//    email: "john.doe@example.org"
+//  }
+// ]
+```
+
+## Custom validators
+
+A custom validator is a `function` with this signature:
+
+```js
+function customValidator(obj, attributeName) {
+  // Do your stuff here
+  // ...
+  var correctResult = obj[attributeName].length > 3;
+
+  // If the provided value is valid, return null.
+  // Otherwise, return a description.
+  return correctResult ? null : "".concat(attributename, " should contains at least 3 elements");
+}
 ```
