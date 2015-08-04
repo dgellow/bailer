@@ -2,7 +2,8 @@
 
 var assert = require('assert'),
     c = require('colors/safe'),
-    b = require('./index');
+    b = require('./index'),
+    v = b.validations;
 
 var counterTotal = 0,
     counterSuccess = 0,
@@ -33,6 +34,9 @@ function reportTest(testName, testFn) {
   }
 }
 
+//
+// b.validate
+//
 reportTest("`validate` without rules", function () {
   assert.deepEqual(
     b.validate(dummyModel),
@@ -52,33 +56,38 @@ reportTest("`validate` without rules", function () {
   );
 });
 
+
+
+//
+// v.required
+//
 reportTest("`required` validations", function () {
   assert.deepEqual(
     b.validate(dummyModel, {
-      firstname: [b.required],
-      age: [b.required]
+      firstname: [v.required],
+      age: [v.required]
     }),
     [null, dummyModel]
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
-      team: [b.required]
+      team: [v.required]
     }),
     [{team: ["team must be present"]}, dummyModel]
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
-      team: [b.required, "A custom message"],
+      team: [v.required, "A custom message"],
     }),
     [{team: ["A custom message"]}, dummyModel]
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
-      team: [b.required],
-      petList: [b.required]
+      team: [v.required],
+      petList: [v.required]
     }),
     [{team: ["team must be present"],
       petList: ["petList must be present"]}, dummyModel]
