@@ -3,7 +3,7 @@
 module.exports.validate = function validate(obj, rules) {
   // If there is no rules passed in parameters, do nothing.
   if (!rules || Object.keys(rules).length === 0) {
-    return [null, obj];
+    return null;
   }
 
   var errors = [].reduce.call(Object.keys(rules), function(accErrors, attribute) {
@@ -37,11 +37,8 @@ module.exports.validate = function validate(obj, rules) {
     return accErrors;
   }, {});
 
-  return [
-    // If `errors` is an empty object, return null instead.
-    Object.keys(errors).length > 0 ? errors: null,
-    obj
-  ];
+  // If `errors` is an empty object, return null instead.
+  return Object.keys(errors).length > 0 ? errors: null;
 };
 
 module.exports.validations = {};

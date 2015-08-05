@@ -41,26 +41,26 @@ function reportTest(testName, testFn) {
 reportTest("`validate` without rules", function () {
   assert.deepEqual(
     b.validate(dummyModel),
-    [null, dummyModel]
+    null
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {}),
-    [null, dummyModel]
+    null
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
       name: []
     }),
-    [null, dummyModel]
+    null
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
       missingProperty: []
     }),
-    [null, dummyModel]
+    null
   );
 });
 
@@ -75,21 +75,21 @@ reportTest("`required` validations", function () {
       firstname: [v.required],
       age: [v.required]
     }),
-    [null, dummyModel]
+    null
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
       team: [v.required]
     }),
-    [{team: ["team must be present"]}, dummyModel]
+    {team: ["team must be present"]}
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
       team: [v.required, "A custom message"],
     }),
-    [{team: ["A custom message"]}, dummyModel]
+    {team: ["A custom message"]}
   );
 
   assert.deepEqual(
@@ -97,8 +97,8 @@ reportTest("`required` validations", function () {
       team: [v.required],
       petList: [v.required]
     }),
-    [{team: ["team must be present"],
-      petList: ["petList must be present"]}, dummyModel]
+    {team: ["team must be present"],
+     petList: ["petList must be present"]}
   );
 });
 
@@ -112,21 +112,21 @@ reportTest("`email` validations", function() {
     b.validate(dummyModel, {
       email: [v.email]
     }),
-    [null, dummyModel]
+    null
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
       name: [v.email]
     }),
-    [{name: ["name is not a valid email address"]}, dummyModel]
+    {name: ["name is not a valid email address"]}
   );
 
   assert.deepEqual(
     b.validate({}, {
       email: [v.email]
     }),
-    [{email: ["email is not a valid email address"]}, {}]
+    {email: ["email is not a valid email address"]}
   );
 });
 
