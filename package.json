@@ -1,6 +1,6 @@
 {
   "name": "bailer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Small validation library. Inspired by leonardoborges/bouncer.",
   "main": "index.js",
   "devDependencies": {
