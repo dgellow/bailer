@@ -44,7 +44,8 @@ module.exports.validate = function validate(obj, rules) {
 module.exports.validations = {};
 
 module.exports.validations.required = function required(obj, attributeName) {
-  return !!obj[attributeName] ? null :
+  var attr = obj[attributeName];
+  return (attr !== undefined && attr !== null) ? null :
     "".concat(attributeName, " must be present");
 };
 

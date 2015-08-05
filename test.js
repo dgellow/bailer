@@ -17,7 +17,9 @@ var dummyModel = {
   messages: [{dest: 'Leo', val: 'Hello'},
              {dest: 'Clotild', val: 'Wanna eat something?'},
              {dest: 'Alphonse', val: '!'}],
-  team: ''
+  team: '',
+  friends: 0,
+  account: null
 };
 
 function reportTest(testName, testFn) {
@@ -85,23 +87,39 @@ reportTest("`required` validations", function () {
     b.validate(dummyModel, {
       team: [v.required]
     }),
-    {team: ["team must be present"]}
+    null
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
-      team: [v.required, "A custom message"],
+      friends: [v.required]
     }),
-    {team: ["A custom message"]}
+    null
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      account: [v.required]
+    }),
+    {account: ["account must be present"]}
   );
 
   assert.deepEqual(
     b.validate(dummyModel, {
       team: [v.required],
+      friends: [v.required],
+      account: [v.required],
       petList: [v.required]
     }),
-    {team: ["team must be present"],
+    {account: ["account must be present"],
      petList: ["petList must be present"]}
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      petList: [v.required, "A custom message"],
+    }),
+    {petList: ["A custom message"]}
   );
 });
 
