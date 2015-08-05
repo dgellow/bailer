@@ -14,7 +14,14 @@ npm install bailer
 
 ## Usage
 
-At the moment, the only built-in validators are `bailer.validations.required` and `bailer.validations.email` (It's a v0.0.2 btw). But you can create your own (see [here](#custom-validators)).
+Built-in validators are:
+- `bailer.validations.required` Validates when not `null` or `undefined`
+- `bailer.validations.email` Check email format via a regexp
+- `bailer.validations.number` Validates when `typeof` returns `"number"`
+- `bailer.validations.string` Validates when `typeof` returns `"string"`
+- `bailer.validations.object` Validates when `typeof` returns `"object"`. Arrays are objects.
+
+You can create your own (see [here](#custom-validators)).
 
 ```js
 var b = require('bailer'),

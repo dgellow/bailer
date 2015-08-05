@@ -17,6 +17,7 @@ var dummyModel = {
   messages: [{dest: 'Leo', val: 'Hello'},
              {dest: 'Clotild', val: 'Wanna eat something?'},
              {dest: 'Alphonse', val: '!'}],
+  pet: {name: 'hollycat', age: 3},
   team: '',
   friends: 0,
   account: null
@@ -148,6 +149,106 @@ reportTest("`email` validations", function() {
       email: [v.email]
     }),
     {email: ["email is not a valid email address"]}
+  );
+});
+
+
+
+//
+// v.number
+//
+reportTest("`number` validations", function() {
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      age: [v.number]
+    }),
+    null
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      lastname: [v.number]
+    }),
+    {lastname: ["lastname must be a number"]}
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      age: [v.number],
+      friends: [v.number],
+      lastname: [v.number],
+      messages: [v.number]
+    }),
+    {lastname: ["lastname must be a number"],
+     messages: ["messages must be a number"]}
+  );
+});
+
+
+
+//
+// v.string
+//
+reportTest("`string` validations", function() {
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      lastname: [v.string]
+    }),
+    null
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      age: [v.string]
+    }),
+    {age: ["age must be a string"]}
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      age: [v.string],
+      friends: [v.string],
+      lastname: [v.string],
+      messages: [v.string]
+    }),
+    {age: ["age must be a string"],
+     friends: ["friends must be a string"],
+     messages: ["messages must be a string"]}
+  );
+});
+
+
+
+//
+// v.object
+//
+reportTest("`object` validations", function() {
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      messages: [v.object],
+      pet: [v.object]
+    }),
+    null
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      age: [v.object]
+    }),
+    {age: ["age must be a object"]}
+  );
+
+  assert.deepEqual(
+    b.validate(dummyModel, {
+      age: [v.object],
+      friends: [v.object],
+      lastname: [v.object],
+      messages: [v.object],
+      pet: [v.object]
+    }),
+    {age: ["age must be a object"],
+     friends: ["friends must be a object"],
+     lastname: ["lastname must be a object"]}
   );
 });
 

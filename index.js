@@ -54,3 +54,12 @@ module.exports.validations.email = function email(obj, attributeName) {
   return emailRegex.test(obj[attributeName]) ? null:
     "".concat(attributeName, " is not a valid email address");
 };
+
+var type = module.exports.validations.type = function type(t, obj, attributeName) {
+  return typeof obj[attributeName] === t ? null :
+    "".concat(attributeName,  " must be a ", t);
+};
+
+module.exports.validations.number = type.bind(null, "number");
+module.exports.validations.string = type.bind(null, "string");
+module.exports.validations.object = type.bind(null, "object");
