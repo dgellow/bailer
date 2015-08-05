@@ -28,8 +28,11 @@ function reportTest(testName, testFn) {
     console.info(c.green('OK'));
     counterSuccess += 1;
   } catch(e) {
+    var match = e.stack.match(/at.+test.js:(\d+):(\d+)/),
+        line = match[1],
+        char = match[2];
     counterFailure += 1;
-    console.error(c.red('FAILED'));
+    console.error(c.red('FAILED') +' ' + c.blue(line + ':' + char));
     console.error(c.red(e.message));
     console.error(c.grey(e.stack));
   }
