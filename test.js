@@ -1,13 +1,9 @@
 /*global require, process*/
 
 var assert = require('assert'),
-    c = require('colors/safe'),
+    t = require('tesuto'),
     b = require('./index'),
     v = b.validations;
-
-var counterTotal = 0,
-    counterSuccess = 0,
-    counterFailure = 0;
 
 var dummyModel = {
   firstname: 'John',
@@ -23,28 +19,12 @@ var dummyModel = {
   account: null
 };
 
-function reportTest(testName, testFn) {
-  try {
-    counterTotal += 1;
-    process.stdout.write(c.yellow(testName + ': '));
-    testFn();
-    console.info(c.green('OK'));
-    counterSuccess += 1;
-  } catch(e) {
-    var match = e.stack.match(/at.+test.js:(\d+):(\d+)/),
-        line = match[1],
-        char = match[2];
-    counterFailure += 1;
-    console.error(c.red('FAILED') +' ' + c.blue(line + ':' + char));
-    console.error(c.red(e.message));
-    console.error(c.grey(e.stack));
-  }
-}
+
 
 //
 // b.validate
 //
-reportTest("`validate` without rules", function () {
+t.report("`validate` without rules", function () {
   assert.deepEqual(
     b.validate(dummyModel),
     null
@@ -75,7 +55,7 @@ reportTest("`validate` without rules", function () {
 //
 // v.required
 //
-reportTest("`required` validations", function () {
+t.report("`required` validations", function () {
   assert.deepEqual(
     b.validate(dummyModel, {
       firstname: [v.required],
@@ -129,7 +109,7 @@ reportTest("`required` validations", function () {
 //
 // v.email
 //
-reportTest("`email` validations", function() {
+t.report("`email` validations", function() {
   assert.deepEqual(
     b.validate(dummyModel, {
       email: [v.email]
@@ -157,7 +137,7 @@ reportTest("`email` validations", function() {
 //
 // v.number
 //
-reportTest("`number` validations", function() {
+t.report("`number` validations", function() {
   assert.deepEqual(
     b.validate(dummyModel, {
       age: [v.number]
@@ -189,7 +169,7 @@ reportTest("`number` validations", function() {
 //
 // v.string
 //
-reportTest("`string` validations", function() {
+t.report("`string` validations", function() {
   assert.deepEqual(
     b.validate(dummyModel, {
       lastname: [v.string]
@@ -222,7 +202,7 @@ reportTest("`string` validations", function() {
 //
 // v.object
 //
-reportTest("`object` validations", function() {
+t.report("`object` validations", function() {
   assert.deepEqual(
     b.validate(dummyModel, {
       messages: [v.object],
@@ -257,6 +237,4 @@ reportTest("`object` validations", function() {
 //
 // Tests result
 //
-console.log('Total: ' + counterTotal);
-console.log('Passed: ' + counterSuccess);
-console.log('Failed: ' + counterFailure);
+t.result();
