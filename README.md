@@ -51,8 +51,8 @@ b.validate(person, {
 // Uh-oh. The person object object doesn't have a truthy corporation
 // (it is empty) or firstname (it is undefined).
 // Result:
-// [{corporation: ["corporation must be present"],
-//   firstname: ["firstname must be present"]}]
+// {corporation: ["corporation must be present"],
+//  firstname: ["firstname must be present"]}
 ```
 
 
@@ -63,7 +63,7 @@ b.validate(person, {
   corporation: [b.required, "What! You don't work for a corporation?!"]
 });
 // which results in:
-// [{corporation: ["What! You don't work for a corporation?!"]}]
+// {corporation: ["What! You don't work for a corporation?!"]}
 ```
 
 ## Custom validators
