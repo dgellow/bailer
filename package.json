@@ -4,7 +4,7 @@
   "description": "Small validation library. Inspired by leonardoborges/bouncer.",
   "main": "index.js",
   "devDependencies": {
-    "tesuto": "0.0.5"
+    "tesuto": "1.0.0"
   },
   "scripts": {
     "test": "node test.js"
